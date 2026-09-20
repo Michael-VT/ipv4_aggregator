@@ -17,6 +17,7 @@
             <span id="mode-badge" class="badge" data-i18n="mode_session">Session monitoring</span>
             <span id="db-info" class="db-info hidden"></span>
             <span id="next-refresh" class="next-refresh"></span>
+            <button id="about-btn" class="about-btn" data-i18n="about_title" title="Legend">?</button>
         </div>
     </header>
 
@@ -45,13 +46,20 @@
             <div class="control">
                 <button id="refresh-btn" data-i18n="refresh_now">🔄 Refresh now</button>
             </div>
-        </section>
 
-        <!-- Легенда / краткое описание -->
-        <details class="card about" id="about-card">
-            <summary data-i18n="about_title">📖 What this page shows</summary>
-            <div id="about-body" class="about-body"></div>
-        </details>
+            <!-- Конвертер: регион + подсеть → цена и пересчёт в другие валюты -->
+            <div class="control conv">
+                <div class="conv-selects">
+                    <select id="conv-region" aria-label="Region"></select>
+                    <select id="conv-block" aria-label="Subnet"></select>
+                </div>
+                <div class="conv-price">
+                    <span id="conv-main" class="conv-main">—</span>
+                    <span id="conv-range" class="conv-range"></span>
+                </div>
+                <div id="conv-alts" class="conv-alts"></div>
+            </div>
+        </section>
 
         <section class="card">
             <h2 data-i18n="table_title">Current lease prices by block</h2>
@@ -94,6 +102,15 @@
         ·
         <a href="https://github.com/Michael-VT/ipv4_aggregator" target="_blank" rel="noopener">GitHub</a>
     </footer>
+
+    <!-- Легенда: всплывающее окно по кнопке «?» в шапке -->
+    <div id="about-modal" class="modal hidden">
+        <div class="modal-box">
+            <button id="about-close" class="modal-close" aria-label="Close">✕</button>
+            <h2 data-i18n="about_title">📖 What this page shows</h2>
+            <div id="about-body" class="about-body"></div>
+        </div>
+    </div>
 
     <!-- Chart.js через CDN (pinned); при недоступности CDN интерфейс
          автоматически переключается на текстовые таблицы -->

@@ -43,6 +43,8 @@ window.I18N = {
         err_fetch: "Failed to load data from the LARUS API",
         err_cors: "Request to LARUS API blocked (CORS or network). If this is the GitHub Pages version, see README → «CORS» for the proxy fallback.",
         footer_source: "Data source: larus.net IPv4 API · source prices in USD",
+        conv_region: "Region (purchase)",
+        conv_block: "Subnet",
         regions: { RIPE: "RIPE NCC (Europe)", ARIN: "ARIN (North America)", APNIC: "APNIC (Asia-Pacific)", LACNIC: "LACNIC (Latin America)", AFRINIC: "AFRINIC (Africa)" },
         about_title: "📖 What this page shows (legend)",
         about_html: `
@@ -95,6 +97,8 @@ For persistent history use the local Node server or the Python dashboard — see
         err_fetch: "Не вдалося завантажити дані з LARUS API",
         err_cors: "Запит до LARUS API заблоковано (CORS або мережа). Якщо це версія GitHub Pages — див. README → «CORS» щодо запасного проксі.",
         footer_source: "Джерело даних: larus.net IPv4 API · вихідні ціни в USD",
+        conv_region: "Регіон (купівля)",
+        conv_block: "Підмережа",
         regions: { RIPE: "RIPE NCC (Європа)", ARIN: "ARIN (Північна Америка)", APNIC: "APNIC (Азія та Тихий океан)", LACNIC: "LACNIC (Латинська Америка)", AFRINIC: "AFRINIC (Африка)" },
         about_title: "📖 Що показує ця сторінка (легенда)",
         about_html: `
@@ -147,6 +151,8 @@ For persistent history use the local Node server or the Python dashboard — see
         err_fetch: "Не удалось загрузить данные с LARUS API",
         err_cors: "Запрос к LARUS API заблокирован (CORS или сеть). Если это версия GitHub Pages — см. README → «CORS» про запасной прокси.",
         footer_source: "Источник данных: larus.net IPv4 API · исходные цены в USD",
+        conv_region: "Регион (покупка)",
+        conv_block: "Подсеть",
         regions: { RIPE: "RIPE NCC (Европа)", ARIN: "ARIN (Северная Америка)", APNIC: "APNIC (Азия-Тихий океан)", LACNIC: "LACNIC (Латинская Америка)", AFRINIC: "AFRINIC (Африка)" },
         about_title: "📖 Что показывает эта страница (легенда)",
         about_html: `
@@ -199,6 +205,8 @@ For persistent history use the local Node server or the Python dashboard — see
         err_fetch: "Falha ao carregar dados da API LARUS",
         err_cors: "Requisição à API LARUS bloqueada (CORS ou rede). Se esta é a versão GitHub Pages, veja o README → «CORS» sobre o proxy alternativo.",
         footer_source: "Fonte de dados: API IPv4 do larus.net · preços originais em USD",
+        conv_region: "Região (compra)",
+        conv_block: "Sub-rede",
         regions: { RIPE: "RIPE NCC (Europa)", ARIN: "ARIN (América do Norte)", APNIC: "APNIC (Ásia-Pacífico)", LACNIC: "LACNIC (América Latina)", AFRINIC: "AFRINIC (África)" },
         about_title: "📖 O que esta página mostra (legenda)",
         about_html: `
@@ -251,6 +259,8 @@ Para histórico persistente, use o servidor Node local ou o painel Python — ve
         err_fetch: "Daten konnten nicht von der LARUS-API geladen werden",
         err_cors: "Anfrage an die LARUS-API blockiert (CORS oder Netzwerk). Falls dies die GitHub-Pages-Version ist, siehe README → „CORS“ zum Proxy-Fallback.",
         footer_source: "Datenquelle: IPv4-API von larus.net · Originalpreise in USD",
+        conv_region: "Region (Kauf)",
+        conv_block: "Subnetz",
         regions: { RIPE: "RIPE NCC (Europa)", ARIN: "ARIN (Nordamerika)", APNIC: "APNIC (Asien-Pazifik)", LACNIC: "LACNIC (Lateinamerika)", AFRINIC: "AFRINIC (Afrika)" },
         about_title: "📖 Was diese Seite zeigt (Legende)",
         about_html: `
@@ -303,6 +313,8 @@ Für dauerhaften Verlauf nutzen Sie den lokalen Node-Server oder das Python-Dash
         err_fetch: "Échec du chargement des données depuis l'API LARUS",
         err_cors: "Requête vers l'API LARUS bloquée (CORS ou réseau). S'il s'agit de la version GitHub Pages, voir le README → « CORS » concernant le proxy de secours.",
         footer_source: "Source des données : API IPv4 de larus.net · prix d'origine en USD",
+        conv_region: "Région (achat)",
+        conv_block: "Sous-réseau",
         regions: { RIPE: "RIPE NCC (Europe)", ARIN: "ARIN (Amérique du Nord)", APNIC: "APNIC (Asie-Pacifique)", LACNIC: "LACNIC (Amérique latine)", AFRINIC: "AFRINIC (Afrique)" },
         about_title: "📖 Ce que montre cette page (légende)",
         about_html: `

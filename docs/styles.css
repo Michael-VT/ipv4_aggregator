@@ -80,6 +80,86 @@ h1 { font-size: 1.25rem; margin: 0; }
 
 .next-refresh { font-variant-numeric: tabular-nums; }
 
+/* Кнопка «?» — легенда */
+.about-btn {
+    font: inherit;
+    font-weight: 700;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--accent);
+    cursor: pointer;
+    line-height: 1;
+}
+.about-btn:hover { border-color: var(--accent); }
+
+/* ---------- Модальное окно легенды ---------- */
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1rem;
+}
+
+.modal-box {
+    position: relative;
+    background: var(--card-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    max-width: 560px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    padding: 1rem 1.25rem;
+}
+
+.modal-box h2 { margin-top: 0; }
+.about-body p { font-size: 0.9rem; margin: 0.5rem 0; }
+
+.modal-close {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.6rem;
+    font: inherit;
+    border: none;
+    background: none;
+    color: var(--text-dim);
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 0.2rem 0.4rem;
+}
+
+/* ---------- Конвертер (регион + подсеть → цена) ---------- */
+.control.conv {
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: 0.4rem 0.75rem;
+    gap: 0.3rem;
+}
+
+.conv-selects { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+.conv-selects select { font-size: 0.85rem; }
+
+.conv-price { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
+.conv-main { font-size: 1.15rem; font-weight: 700; }
+.conv-range { font-size: 0.78rem; color: var(--text-dim); }
+
+.conv-alts {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    font-size: 0.78rem;
+    color: var(--text-dim);
+}
+
 #lang-select, #location-select {
     font: inherit;
     padding: 0.3rem 0.5rem;

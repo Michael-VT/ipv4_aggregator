@@ -200,6 +200,75 @@
         return Promise.resolve(series);
     }
 
+    // ---------- Конвертер: регион + подсеть → цена в валютах ----------
+    function renderConverter() {
+        var regionSel = $("conv-region");
+        var blockSel = $("conv-block");
+        var regions = t("regions") || {};
+
+        // Заполняем селекторы (сохраняя выбранные значения)
+        var prevRegion = state.convRegion || regionSel.value;
+        var prevBlock = state.convBlock || blockSel.value;
+        regionSel.innerHTML = "";
+        REGION_CODES.forEach(function (code) {
+            var opt = document.createElement("option");
+            opt.value = code;
+            opt.textContent = regions[code] || code;
+            regionSel.appendChild(opt);
+        });
+        blockSel.innerHTML = "";
+        BLOCKS.forEach(function (b) {
+            var opt = document.createElement("option");
+            opt.value = b.size;
+            opt.textContent = b.size;
+            blockSel.appendChild(opt);
+        });
+        state.convRegion = REGION_CODES.indexOf(prevRegion) !== -1 ? prevRegion : REGION_CODES[0];
+        state.convBlock = prevBlock || state.selectedBlock;
+        regionSel.value = state.convRegion;
+        blockSel.value = state.convBlock;
+
+        // Цена покупки: средняя (основная) + мин–макс
+        var data = (window.PURCHASE_PRICES || {})[state.convRegion];
+        var p = data && data[state.convBlock];
+        if (p) {
+            $("conv-main").textContent = fmtPrice(p.avg, 2);
+            $("conv-range").textContent = t("col_min") + " " + fmtPrice(p.min, 2) +
+                " – " + t("col_max") + " " + fmtPrice(p.max, 2);
+            // Пересчёт в альтернативные валюты
+            var alts = $("conv-alts");
+            alts.innerHTML = "";
+            Object.keys(SYMBOLS).forEach(function (cur) {
+                if (cur === state.currency) return;
+                var rate = state.rates[cur] || 1;
+                var v = p.avg * rate;
+                var s = Number(v).toFixed(2);
+                var text = cur === "PLN" ? s + " " + SYMBOLS[cur] : SYMBOLS[cur] + s;
+                var span = document.createElement("span");
+                span.textContent = cur + " " + text;
+                alts.appendChild(span);
+            });
+        } else {
+            $("conv-main").textContent = "—";
+            $("conv-range").textContent = "";
+            $("conv-alts").innerHTML = "";
+        }
+    }
+
+    // ---------- Легенда (модальное окно) ----------
+    function initModal() {
+        var modal = $("about-modal");
+        $("about-btn").addEventListener("click", function () { modal.classList.remove("hidden"); });
+        $("about-close").addEventListener("click", function () { modal.classList.add("hidden"); });
+        // Клик по тёмному фону закрывает окно
+        modal.addEventListener("click", function (e) {
+            if (e.target === modal) modal.classList.add("hidden");
+        });
+        document.addEventListener("keydown", function (e) {
+            if (e.key === "Escape") modal.classList.add("hidden");
+        });
+    }
+
     // ---------- Отрисовка ----------
     function applyLang() {
         document.documentElement.lang = state.lang;
@@ -470,6 +539,7 @@
         renderTable();
         renderLeaseChart();
         renderPurchase();
+        renderConverter();
         loadHistory().then(renderHistoryChart);
     }
 
@@ -536,6 +606,17 @@
         $("currency-select").value = state.currency;
         $("refresh-btn").addEventListener("click", tick);
 
+        // Конвертер: смена региона/подсети перерисовывает только его
+        $("conv-region").addEventListener("change", function (e) {
+            state.convRegion = e.target.value;
+            renderConverter();
+        });
+        $("conv-block").addEventListener("change", function (e) {
+            state.convBlock = e.target.value;
+            renderConverter();
+        });
+
+        initModal();
         loadRates();
 
         // ВАЖНО: заполняем интерфейс (включая селектор языка) сразу при загрузке

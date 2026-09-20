@@ -1,7 +1,7 @@
 # 📡 IPv4 Price Aggregator
 
-Suivi des prix des blocs IPv4 : **prix de location en direct** de l'API
-publique [LARUS IPv4](https://larus.net/) et **prix d'achat sur le marché**
+Suivi des prix des blocs IPv4 : **prix de location en direct** d'une API
+publique de marché et **prix d'achat sur le marché**
 par région RIR, avec historique, graphiques et une interface en 6 langues
 (anglais, ukrainien, russe, portugais, allemand, français).
 
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 Ouvrez http://localhost:8501. Le tableau de bord comporte quatre onglets :
-prix de location en direct (LARUS), prix d'achat par région, historique et
+prix de location en direct de l'API de marché, prix d'achat par région, historique et
 graphiques, et à propos.
 
 - **Actualisation automatique** (case à cocher dans la barre latérale)
@@ -69,7 +69,7 @@ Ouvrez **http://localhost:8787**.
 
 Ce qu'elle fait :
 - Dès le démarrage puis toutes les **5 minutes**, elle récupère les prix de
-  location LARUS et écrit un snapshot dans la base partagée `ipv4_prices.db`
+  location de l'API de marché et écrit un snapshot dans la base partagée `ipv4_prices.db`
   (les lignes sont marquées `writer='node'`). Le navigateur n'a **pas**
   besoin d'être ouvert — la collecte tourne en arrière-plan.
 - Sert l'interface web depuis `docs/` (même page que la variante GitHub
@@ -83,7 +83,7 @@ Ce qu'elle fait :
 | Variable | Défaut | Signification |
 |---|---|---|
 | `PORT` | `8787` | Port HTTP |
-| `LARUS_LOCATION` | `US` | Localisation de l'API passée à LARUS (`US`, `EU`) |
+| `LARUS_LOCATION` | `US` | Localisation de l'API passée à l'API de prix (`US`, `EU`) |
 
 ### Arrêt
 `Ctrl+C` ou `kill <pid>` (SIGTERM) : le minuteur de collecte s'arrête, le
@@ -129,16 +129,17 @@ base `ipv4_prices.db` à la racine du projet :
 
 ## CORS (variante GitHub Pages)
 
-Le navigateur sur GitHub Pages interroge l'API LARUS directement. Cela
-fonctionne parce que LARUS renvoie `access-control-allow-origin: *` — vérifié
+Le navigateur sur GitHub Pages interroge l'API de prix directement. Cela
+fonctionne parce que l'API renvoie `access-control-allow-origin: *` — vérifié
 le **2026-09-20** avec :
 
 ```bash
+# PRICE_API_URL : l'adresse de l'API de prix
 curl -sS -D - -o /dev/null -H "Origin: https://<username>.github.io" \
-  "https://larus.net/ipv4/api/price/continuity-quote?num=1&months=1&location=US"
+  "<PRICE_API_URL>"
 ```
 
-Si LARUS supprime un jour cet en-tête, la page affiche un bandeau
+Si l'API supprime un jour cet en-tête, la page affiche un bandeau
 d'avertissement. Solution de repli : définir un proxy CORS public en lecture
 seule dans la console du navigateur :
 
@@ -157,7 +158,7 @@ locale n'a jamais besoin de proxy.
 ipv4_aggregator/
 ├── app.py            # Python dashboard (Streamlit) — variant 1
 ├── i18n.py           # UI strings, 6 languages (Python side)
-├── data_sources.py   # LARUS API fetcher + market purchase prices
+├── data_sources.py   # chargeur des prix en direct + market purchase prices
 ├── db.py             # SQLite layer (shared storage, WAL, writer column)
 ├── requirements.txt  # Python dependencies (4 packages)
 ├── server.js         # Local Node variant — variant 2 (zero npm deps)
@@ -184,8 +185,8 @@ ipv4_aggregator/
 
 ## Sources de données
 
-- **Location (en direct)** : [API LARUS IPv4](https://larus.net/) — plans
-  CAPACITY_ONLY et CONTINUITY_PRODUCTION, /24…/16, en USD.
+- **Location (en direct)** : API publique de marché — plans
+  CAPACITY_ONLY et CONTINUITY_PRODUCTION, /24…/16, USD.
 - **Achat** : instantanés manuels du marché (rapports IPv4Center /
   IPv4.Global) par région RIR, dans `data_sources.py`.
 

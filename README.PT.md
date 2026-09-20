@@ -1,7 +1,7 @@
 # 📡 IPv4 Price Aggregator
 
 Monitoramento dos preços de blocos IPv4: **preços de locação em tempo real**
-da [LARUS IPv4 API](https://larus.net/) pública e **preços de compra de
+de uma API pública de mercado e **preços de compra de
 mercado** por região de RIR, com histórico, gráficos e interface em 6 idiomas
 (incluindo português do Brasil, inglês, ucraniano, russo, alemão e francês).
 
@@ -39,7 +39,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 Abra http://localhost:8501. O dashboard tem quatro abas: preços de locação em
-tempo real (LARUS), preços de compra por região, histórico e gráficos, e
+tempo real (API de mercado), preços de compra por região, histórico e gráficos, e
 sobre.
 
 - **Auto-refresh** (atualização automática, caixa de seleção na barra
@@ -69,7 +69,7 @@ Abra **http://localhost:8787**.
 
 O que ela faz:
 - Imediatamente ao iniciar e depois a cada **5 minutos** coleta os preços de
-  locação da LARUS e grava um snapshot no `ipv4_prices.db` compartilhado
+  locação da API de mercado e grava um snapshot no `ipv4_prices.db` compartilhado
   (as linhas são marcadas com `writer='node'`). O navegador **não** precisa
   estar aberto — a coleta roda em segundo plano.
 - Serve a interface web a partir de `docs/` (a mesma página da variante
@@ -84,7 +84,7 @@ O que ela faz:
 | Variável | Padrão | Significado |
 |---|---|---|
 | `PORT` | `8787` | Porta HTTP |
-| `LARUS_LOCATION` | `US` | Localidade da API passada para a LARUS (`US`, `EU`) |
+| `LARUS_LOCATION` | `US` | Localidade da API passada para a API de preços (`US`, `EU`) |
 
 ### Encerramento
 `Ctrl+C` ou `kill <pid>` (SIGTERM): o temporizador de coleta para, o servidor
@@ -130,16 +130,18 @@ Tanto o dashboard Python quanto o servidor Node escrevem no mesmo
 
 ## CORS (variante GitHub Pages)
 
-O navegador no GitHub Pages busca a API da LARUS diretamente. Isso funciona
-porque a LARUS retorna `access-control-allow-origin: *` — verificado em
+O navegador no GitHub Pages busca a API de preços diretamente. Isso funciona
+porque a API retorna `access-control-allow-origin: *` — verificado em
 **2026-09-20** com:
 
 ```bash
 curl -sS -D - -o /dev/null -H "Origin: https://<username>.github.io" \
-  "https://larus.net/ipv4/api/price/continuity-quote?num=1&months=1&location=US"
+  "<PRICE_API_URL>"
 ```
 
-Se a LARUS um dia remover esse cabeçalho, a página exibe um banner de aviso.
+onde `PRICE_API_URL` é o endereço da API de preços.
+
+Se a API um dia remover esse cabeçalho, a página exibe um banner de aviso.
 Solução alternativa: defina um proxy CORS público somente de leitura no
 console do navegador:
 
@@ -158,7 +160,7 @@ precisa de proxy.
 ipv4_aggregator/
 ├── app.py            # Python dashboard (Streamlit) — variant 1
 ├── i18n.py           # UI strings, 6 languages (Python side)
-├── data_sources.py   # LARUS API fetcher + market purchase prices
+├── data_sources.py   # carregador de preços em tempo real + market purchase prices
 ├── db.py             # SQLite layer (shared storage, WAL, writer column)
 ├── requirements.txt  # Python dependencies (4 packages)
 ├── server.js         # Local Node variant — variant 2 (zero npm deps)
@@ -185,7 +187,7 @@ ipv4_aggregator/
 
 ## Fontes de dados
 
-- **Locação (tempo real)**: [LARUS IPv4 API](https://larus.net/) — planos
+- **Locação (tempo real)**: API pública de mercado — planos
   CAPACITY_ONLY e CONTINUITY_PRODUCTION, /24…/16, USD.
 - **Compra**: snapshots manuais de mercado (relatórios de IPv4Center /
   IPv4.Global) por região de RIR, em `data_sources.py`.

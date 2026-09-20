@@ -202,6 +202,12 @@
 
     // ---------- Конвертер: регион + подсеть → цена в валютах ----------
     function renderConverter() {
+        var curSym = SYMBOLS[state.currency] || "$";
+        var curRate = state.rates[state.currency] || 1;
+        // Подпись поля своей цены с символом текущей валюты
+        $("conv-own-label").textContent = t("conv_own") +
+            " (" + (state.currency === "PLN" ? "" : curSym) + state.currency +
+            (state.currency === "PLN" ? " " + curSym : "") + ")";
         var regionSel = $("conv-region");
         var blockSel = $("conv-block");
         var regions = t("regions") || {};
@@ -252,6 +258,38 @@
             $("conv-main").textContent = "—";
             $("conv-range").textContent = "";
             $("conv-alts").innerHTML = "";
+        }
+
+        // --- Своя цена за IP: пересчёт во все валюты + разница с рынком ---
+        var ownOut = $("conv-own-alts");
+        var diffEl = $("conv-diff");
+        ownOut.innerHTML = "";
+        diffEl.textContent = "";
+        diffEl.className = "conv-diff";
+
+        var own = parseFloat($("conv-own-input").value);
+        if (own > 0 && p) {
+            // Своя цена задана в выбранной валюте → пересчёт в остальные
+            Object.keys(SYMBOLS).forEach(function (cur) {
+                if (cur === state.currency) return;
+                var v = own * (state.rates[cur] || 1) / curRate;
+                var s = Number(v).toFixed(2);
+                var text = cur === "PLN" ? s + " " + SYMBOLS[cur] : SYMBOLS[cur] + s;
+                var span = document.createElement("span");
+                span.textContent = cur + " " + text;
+                ownOut.appendChild(span);
+            });
+            // Разница: своя цена против рыночной средней (в выбранной валюте)
+            var market = p.avg * curRate;
+            var d = own - market;
+            var pct = market > 0 ? Math.round(d / market * 100) : 0;
+            var sign = d >= 0 ? "+" : "−";
+            diffEl.textContent = t("conv_diff") + ": " + sign +
+                (state.currency === "PLN" ? "" : curSym) +
+                Math.abs(d).toFixed(2) +
+                (state.currency === "PLN" ? " " + curSym : "") +
+                " (" + sign + Math.abs(pct) + "%)";
+            diffEl.classList.add(d >= 0 ? "conv-diff-neg" : "conv-diff-pos");
         }
     }
 
@@ -615,9 +653,11 @@
             state.convBlock = e.target.value;
             renderConverter();
         });
+        // Своя цена за IP: мгновенный пересчёт при вводе
+        $("conv-own-input").addEventListener("input", renderConverter);
 
         initModal();
-        loadRates();
+        loadRates().then(renderConverter);
 
         // ВАЖНО: заполняем интерфейс (включая селектор языка) сразу при загрузке
         applyLang();

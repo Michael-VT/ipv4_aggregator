@@ -137,12 +137,25 @@ h1 { font-size: 1.25rem; margin: 0; }
     padding: 0.2rem 0.4rem;
 }
 
-/* ---------- Конвертер (регион + подсеть → цена) ---------- */
+/* ---------- Конвертер (регион + подсеть → цена; своя цена справа) ---------- */
 .control.conv {
     border: 1px dashed var(--border);
     border-radius: 10px;
     padding: 0.4rem 0.75rem;
     gap: 0.3rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.conv-left { display: flex; flex-direction: column; gap: 0.3rem; }
+.conv-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    border-left: 1px dashed var(--border);
+    padding-left: 1rem;
 }
 
 .conv-selects { display: flex; gap: 0.4rem; flex-wrap: wrap; }
@@ -158,6 +171,39 @@ h1 { font-size: 1.25rem; margin: 0; }
     flex-wrap: wrap;
     font-size: 0.78rem;
     color: var(--text-dim);
+}
+
+/* Своя цена за IP */
+.conv-own { display: flex; align-items: center; gap: 0.4rem; flex-wrap: wrap; }
+.conv-own label { font-size: 0.78rem; color: var(--text-dim); }
+
+#conv-own-input {
+    font: inherit;
+    width: 90px;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text);
+}
+
+/* Разница с рынком: дешевле рынка — зелёная, дороже — красная */
+.conv-diff { font-size: 0.85rem; font-weight: 700; min-height: 1.2em; }
+.conv-diff-pos { color: #1e8e4e; }
+.conv-diff-neg { color: #c62828; }
+@media (prefers-color-scheme: dark) {
+    .conv-diff-pos { color: #5ddb8f; }
+    .conv-diff-neg { color: #ff8a80; }
+}
+
+@media (max-width: 640px) {
+    .conv-right {
+        border-left: none;
+        border-top: 1px dashed var(--border);
+        padding-left: 0;
+        padding-top: 0.4rem;
+        width: 100%;
+    }
 }
 
 #lang-select, #location-select {

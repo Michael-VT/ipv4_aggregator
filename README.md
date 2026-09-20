@@ -1,7 +1,7 @@
 # 📡 IPv4 Price Aggregator
 
-Monitoring of IPv4 block prices: **live lease prices** from the public
-[LARUS IPv4 API](https://larus.net/) and **market purchase prices** per RIR
+Monitoring of IPv4 block prices: **live lease prices** from a public
+market API and **market purchase prices** per RIR
 region, with history, charts and a 6-language interface
 (English, Ukrainian, Russian, Portuguese, German, French).
 
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 Open http://localhost:8501. The dashboard has four tabs: live lease prices
-(LARUS), purchase prices by region, history & charts, and about.
+(live), purchase prices by region, history & charts, and about.
 
 - **Auto-refresh** (checkbox in the sidebar) re-renders the live tab every
   5 minutes; each successful refresh is saved to SQLite.
@@ -67,7 +67,7 @@ node server.js
 Open **http://localhost:8787**.
 
 What it does:
-- Immediately on start and then every **5 minutes** it fetches LARUS lease
+- Immediately on start and then every **5 minutes** it fetches live lease
   prices and writes a snapshot into the shared `ipv4_prices.db`
   (rows are marked `writer='node'`). The browser does **not** need to be
   open — collection runs in the background.
@@ -82,7 +82,7 @@ What it does:
 | Variable | Default | Meaning |
 |---|---|---|
 | `PORT` | `8787` | HTTP port |
-| `LARUS_LOCATION` | `US` | API location passed to LARUS (`US`, `EU`) |
+| `LARUS_LOCATION` | `US` | API location passed to the price API (`US`, `EU`) |
 
 ### Exit
 `Ctrl+C` or `kill <pid>` (SIGTERM): the collection timer stops, the HTTP
@@ -124,16 +124,16 @@ Both the Python dashboard and the Node server write to the same
 
 ## CORS (GitHub Pages variant)
 
-The browser on GitHub Pages fetches the LARUS API directly. This works
-because LARUS returns `access-control-allow-origin: *` — verified on
+The browser on GitHub Pages fetches the price API directly. This works
+because the API returns `access-control-allow-origin: *` — verified on
 **2026-09-20** with:
 
 ```bash
-curl -sS -D - -o /dev/null -H "Origin: https://<username>.github.io" \
-  "https://larus.net/ipv4/api/price/continuity-quote?num=1&months=1&location=US"
+curl -sS -D - -o /dev/null -H "Origin: https://<username>.github.io" "<PRICE_API_URL>"
 ```
+(`PRICE_API_URL` — the address of the price API used by the app.)
 
-If LARUS ever drops that header, the page shows a warning banner. Fallback:
+If the API ever drops that header, the page shows a warning banner. Fallback:
 set a read-only public CORS proxy in the browser console:
 
 ```js
@@ -150,7 +150,7 @@ may be cached. The local Node variant never needs a proxy.
 ipv4_aggregator/
 ├── app.py            # Python dashboard (Streamlit) — variant 1
 ├── i18n.py           # UI strings, 6 languages (Python side)
-├── data_sources.py   # LARUS API fetcher + market purchase prices
+├── data_sources.py   # live price fetcher + market purchase prices
 ├── db.py             # SQLite layer (shared storage, WAL, writer column)
 ├── requirements.txt  # Python dependencies (4 packages)
 ├── server.js         # Local Node variant — variant 2 (zero npm deps)
@@ -177,7 +177,7 @@ ipv4_aggregator/
 
 ## Data sources
 
-- **Lease (live)**: [LARUS IPv4 API](https://larus.net/) — CAPACITY_ONLY and
+- **Lease (live)**: public market API — CAPACITY_ONLY and
   CONTINUITY_PRODUCTION plans, /24…/16, USD.
 - **Purchase**: manual market snapshots (IPv4Center / IPv4.Global reports)
   per RIR region, in `data_sources.py`.

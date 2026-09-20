@@ -1,7 +1,7 @@
 # 📡 IPv4 Price Aggregator
 
-Моніторинг цін на блоки IPv4: **ціни на оренду в реальному часі** з публічної
-[LARUS IPv4 API](https://larus.net/) та **ринкові ціни купівлі** за регіонами RIR,
+Моніторинг цін на блоки IPv4: **ціни на оренду в реальному часі** з публічного
+ринкового API та **ринкові ціни купівлі** за регіонами RIR,
 з історією, графіками та інтерфейсом шістьма мовами
 (англійська, українська, російська, португальська, німецька, французька).
 
@@ -40,7 +40,7 @@ pip install -r requirements.txt
 streamlit run app.py
 ```
 Відкрийте http://localhost:8501. Дашборд має чотири вкладки: ціни оренди в
-реальному часі (LARUS), ціни купівлі за регіонами, історія та графіки, і
+реальному часі, ціни купівлі за регіонами, історія та графіки, і
 «про проєкт».
 
 - **Автооновлення** (прапорець у бічній панелі) щоп'яти хвилин перемальовує
@@ -67,7 +67,8 @@ node server.js
 Відкрийте **http://localhost:8787**.
 
 Що він робить:
-- Одразу після старту, а далі кожні **5 хвилин** отримує ціни оренди LARUS і
+- Одразу після старту, а далі кожні **5 хвилин** отримує ціни оренди з живого
+  API цін і
   записує snapshot до спільної бази `ipv4_prices.db` (рядки позначаються
   `writer='node'`). Браузер тримати відкритим **не** потрібно — збір даних
   працює у фоновому режимі.
@@ -82,7 +83,7 @@ node server.js
 | Змінна | Типово | Значення |
 |---|---|---|
 | `PORT` | `8787` | HTTP-порт |
-| `LARUS_LOCATION` | `US` | Локація, що передається до LARUS (`US`, `EU`) |
+| `LARUS_LOCATION` | `US` | Локація, що передається до API цін (`US`, `EU`) |
 
 ### Завершення роботи
 `Ctrl+C` або `kill <pid>` (SIGTERM): таймер збору даних зупиняється, HTTP-сервер
@@ -124,16 +125,17 @@ SQLite відкотить транзакцію під час наступног�
 
 ## CORS (варіант GitHub Pages)
 
-Браузер на GitHub Pages звертається до LARUS API напряму. Це працює, бо LARUS
+Браузер на GitHub Pages звертається до API цін напряму. Це працює, бо API
 повертає заголовок `access-control-allow-origin: *` — перевірено
 **2026-09-20** такою командою:
 
 ```bash
 curl -sS -D - -o /dev/null -H "Origin: https://<username>.github.io" \
-  "https://larus.net/ipv4/api/price/continuity-quote?num=1&months=1&location=US"
+  "<PRICE_API_URL>"
 ```
 
-Якщо LARUS колись прибере цей заголовок, сторінка покаже попереджувальний
+(де `PRICE_API_URL` — адреса API цін). Якщо API колись прибере цей заголовок,
+сторінка покаже попереджувальний
 банер. Запасний варіант: пропишіть публічний CORS-проксі (лише читання) в
 консолі браузера:
 
@@ -152,7 +154,7 @@ localStorage.setItem("ipv4agg.proxy", "https://corsproxy.io/?");
 ipv4_aggregator/
 ├── app.py            # Python dashboard (Streamlit) — variant 1
 ├── i18n.py           # UI strings, 6 languages (Python side)
-├── data_sources.py   # LARUS API fetcher + market purchase prices
+├── data_sources.py   # завантажувач живих цін + market purchase prices
 ├── db.py             # SQLite layer (shared storage, WAL, writer column)
 ├── requirements.txt  # Python dependencies (4 packages)
 ├── server.js         # Local Node variant — variant 2 (zero npm deps)
@@ -179,7 +181,7 @@ ipv4_aggregator/
 
 ## Джерела даних
 
-- **Оренда (у реальному часі)**: [LARUS IPv4 API](https://larus.net/) — плани
+- **Оренда (у реальному часі)**: публічне ринкове API — плани
   CAPACITY_ONLY та CONTINUITY_PRODUCTION, /24…/16, у доларах США.
 - **Купівля**: ручні ринкові snapshot-и (звіти IPv4Center / IPv4.Global) за
   регіонами RIR, у файлі `data_sources.py`.

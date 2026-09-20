@@ -47,17 +47,28 @@
                 <button id="refresh-btn" data-i18n="refresh_now">🔄 Refresh now</button>
             </div>
 
-            <!-- Конвертер: регион + подсеть → цена и пересчёт в другие валюты -->
+            <!-- Конвертер: регион + подсеть → цена, пересчёт в другие валюты
+                 и сравнение со своей ценой за IP -->
             <div class="control conv">
-                <div class="conv-selects">
-                    <select id="conv-region" aria-label="Region"></select>
-                    <select id="conv-block" aria-label="Subnet"></select>
+                <div class="conv-left">
+                    <div class="conv-selects">
+                        <select id="conv-region" aria-label="Region"></select>
+                        <select id="conv-block" aria-label="Subnet"></select>
+                    </div>
+                    <div class="conv-price">
+                        <span id="conv-main" class="conv-main">—</span>
+                        <span id="conv-range" class="conv-range"></span>
+                    </div>
+                    <div id="conv-alts" class="conv-alts"></div>
                 </div>
-                <div class="conv-price">
-                    <span id="conv-main" class="conv-main">—</span>
-                    <span id="conv-range" class="conv-range"></span>
+                <div class="conv-right">
+                    <div class="conv-own">
+                        <label for="conv-own-input" id="conv-own-label">Your price / IP</label>
+                        <input id="conv-own-input" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal">
+                    </div>
+                    <div id="conv-own-alts" class="conv-alts"></div>
+                    <div id="conv-diff" class="conv-diff"></div>
                 </div>
-                <div id="conv-alts" class="conv-alts"></div>
             </div>
         </section>
 

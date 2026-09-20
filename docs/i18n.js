@@ -40,15 +40,17 @@ window.I18N = {
         col_avg: "Avg",
         col_max: "Max",
         col_range: "Range",
-        err_fetch: "Failed to load data from the LARUS API",
-        err_cors: "Request to LARUS API blocked (CORS or network). If this is the GitHub Pages version, see README → «CORS» for the proxy fallback.",
-        footer_source: "Data source: larus.net IPv4 API · source prices in USD",
+        err_fetch: "Failed to load data from the price API",
+        err_cors: "Request to the price API blocked (CORS or network). If this is the GitHub Pages version, see README → «CORS» for the proxy fallback.",
+        footer_source: "Data source: public IPv4 market API · source prices in USD",
         conv_region: "Region (purchase)",
         conv_block: "Subnet",
+        conv_own: "Your price / IP",
+        conv_diff: "difference",
         regions: { RIPE: "RIPE NCC (Europe)", ARIN: "ARIN (North America)", APNIC: "APNIC (Asia-Pacific)", LACNIC: "LACNIC (Latin America)", AFRINIC: "AFRINIC (Africa)" },
         about_title: "📖 What this page shows (legend)",
         about_html: `
-<p><b>Lease (LARUS API)</b> — monthly rental of IPv4 blocks /24–/16, updated live every 5 minutes.
+<p><b>Lease (live)</b> — monthly rental of IPv4 blocks /24–/16, updated live every 5 minutes.
 Two plans: <b>Base</b> (Capacity Only) — minimum price per IP, and <b>Production</b> — with SLA and production support.</p>
 <p><b>Purchase by region</b> — one-time market price of addresses per RIR region
 (RIPE NCC — Europe, ARIN — North America, APNIC — Asia-Pacific, LACNIC — Latin America, AFRINIC — Africa):
@@ -94,15 +96,17 @@ For persistent history use the local Node server or the Python dashboard — see
         col_avg: "Середнє",
         col_max: "Макс",
         col_range: "Діапазон",
-        err_fetch: "Не вдалося завантажити дані з LARUS API",
-        err_cors: "Запит до LARUS API заблоковано (CORS або мережа). Якщо це версія GitHub Pages — див. README → «CORS» щодо запасного проксі.",
-        footer_source: "Джерело даних: larus.net IPv4 API · вихідні ціни в USD",
+        err_fetch: "Не вдалося завантажити дані з API цін",
+        err_cors: "Запит до API цін заблоковано (CORS або мережа). Якщо це версія GitHub Pages — див. README → «CORS» щодо запасного проксі.",
+        footer_source: "Джерело даних: публічне ринкове API IPv4 · вихідні ціни в USD",
         conv_region: "Регіон (купівля)",
         conv_block: "Підмережа",
+        conv_own: "Ваша ціна / IP",
+        conv_diff: "різниця",
         regions: { RIPE: "RIPE NCC (Європа)", ARIN: "ARIN (Північна Америка)", APNIC: "APNIC (Азія та Тихий океан)", LACNIC: "LACNIC (Латинська Америка)", AFRINIC: "AFRINIC (Африка)" },
         about_title: "📖 Що показує ця сторінка (легенда)",
         about_html: `
-<p><b>Оренда (LARUS API)</b> — щомісячна оренда блоків IPv4 /24–/16, оновлюється наживо кожні 5 хвилин.
+<p><b>Оренда (наживо)</b> — щомісячна оренда блоків IPv4 /24–/16, оновлюється наживо кожні 5 хвилин.
 Два тарифи: <b>Base</b> (Capacity Only) — мінімальна ціна за IP, та <b>Production</b> — зі SLA та production-підтримкою.</p>
 <p><b>Купівля за регіонами</b> — разова ринкова ціна адрес у регіонах RIR
 (RIPE NCC — Європа, ARIN — Північна Америка, APNIC — Азія та Тихий океан, LACNIC — Латинська Америка, AFRINIC — Африка):
@@ -148,15 +152,17 @@ For persistent history use the local Node server or the Python dashboard — see
         col_avg: "Среднее",
         col_max: "Макс",
         col_range: "Диапазон",
-        err_fetch: "Не удалось загрузить данные с LARUS API",
-        err_cors: "Запрос к LARUS API заблокирован (CORS или сеть). Если это версия GitHub Pages — см. README → «CORS» про запасной прокси.",
-        footer_source: "Источник данных: larus.net IPv4 API · исходные цены в USD",
+        err_fetch: "Не удалось загрузить данные с API цен",
+        err_cors: "Запрос к API цен заблокирован (CORS или сеть). Если это версия GitHub Pages — см. README → «CORS» про запасной прокси.",
+        footer_source: "Источник данных: публичное рыночное API IPv4 · исходные цены в USD",
         conv_region: "Регион (покупка)",
         conv_block: "Подсеть",
+        conv_own: "Ваша цена / IP",
+        conv_diff: "разница",
         regions: { RIPE: "RIPE NCC (Европа)", ARIN: "ARIN (Северная Америка)", APNIC: "APNIC (Азия-Тихий океан)", LACNIC: "LACNIC (Латинская Америка)", AFRINIC: "AFRINIC (Африка)" },
         about_title: "📖 Что показывает эта страница (легенда)",
         about_html: `
-<p><b>Аренда (LARUS API)</b> — ежемесячная аренда блоков IPv4 /24–/16, обновляется вживую каждые 5 минут.
+<p><b>Аренда (live)</b> — ежемесячная аренда блоков IPv4 /24–/16, обновляется вживую каждые 5 минут.
 Два тарифа: <b>Base</b> (Capacity Only) — минимальная цена за IP, и <b>Production</b> — со SLA и production-поддержкой.</p>
 <p><b>Покупка по регионам</b> — разовая рыночная цена адресов в регионах RIR
 (RIPE NCC — Европа, ARIN — Северная Америка, APNIC — Азия-Тихий океан, LACNIC — Латинская Америка, AFRINIC — Африка):
@@ -202,15 +208,17 @@ For persistent history use the local Node server or the Python dashboard — see
         col_avg: "Média",
         col_max: "Máx",
         col_range: "Faixa",
-        err_fetch: "Falha ao carregar dados da API LARUS",
-        err_cors: "Requisição à API LARUS bloqueada (CORS ou rede). Se esta é a versão GitHub Pages, veja o README → «CORS» sobre o proxy alternativo.",
-        footer_source: "Fonte de dados: API IPv4 do larus.net · preços originais em USD",
+        err_fetch: "Falha ao carregar dados da API de preços",
+        err_cors: "Requisição à API de preços bloqueada (CORS ou rede). Se esta é a versão GitHub Pages, veja o README → «CORS» sobre o proxy alternativo.",
+        footer_source: "Fonte de dados: API pública de mercado IPv4 · preços originais em USD",
         conv_region: "Região (compra)",
         conv_block: "Sub-rede",
+        conv_own: "Seu preço / IP",
+        conv_diff: "diferença",
         regions: { RIPE: "RIPE NCC (Europa)", ARIN: "ARIN (América do Norte)", APNIC: "APNIC (Ásia-Pacífico)", LACNIC: "LACNIC (América Latina)", AFRINIC: "AFRINIC (África)" },
         about_title: "📖 O que esta página mostra (legenda)",
         about_html: `
-<p><b>Locação (API LARUS)</b> — aluguel mensal de blocos IPv4 /24–/16, atualizado em tempo real a cada 5 minutos.
+<p><b>Locação (em tempo real)</b> — aluguel mensal de blocos IPv4 /24–/16, atualizado em tempo real a cada 5 minutos.
 Dois planos: <b>Base</b> (Capacity Only) — preço mínimo por IP, e <b>Production</b> — com SLA e suporte de produção.</p>
 <p><b>Compra por região</b> — preço de mercado único dos endereços por região RIR
 (RIPE NCC — Europa, ARIN — América do Norte, APNIC — Ásia-Pacífico, LACNIC — América Latina, AFRINIC — África):
@@ -256,15 +264,17 @@ Para histórico persistente, use o servidor Node local ou o painel Python — ve
         col_avg: "Durchschn.",
         col_max: "Max",
         col_range: "Spanne",
-        err_fetch: "Daten konnten nicht von der LARUS-API geladen werden",
-        err_cors: "Anfrage an die LARUS-API blockiert (CORS oder Netzwerk). Falls dies die GitHub-Pages-Version ist, siehe README → „CORS“ zum Proxy-Fallback.",
-        footer_source: "Datenquelle: IPv4-API von larus.net · Originalpreise in USD",
+        err_fetch: "Daten konnten nicht von der Preis-API geladen werden",
+        err_cors: "Anfrage an die Preis-API blockiert (CORS oder Netzwerk). Falls dies die GitHub-Pages-Version ist, siehe README → „CORS“ zum Proxy-Fallback.",
+        footer_source: "Datenquelle: öffentliche Markt-API für IPv4 · Originalpreise in USD",
         conv_region: "Region (Kauf)",
         conv_block: "Subnetz",
+        conv_own: "Ihr Preis / IP",
+        conv_diff: "Differenz",
         regions: { RIPE: "RIPE NCC (Europa)", ARIN: "ARIN (Nordamerika)", APNIC: "APNIC (Asien-Pazifik)", LACNIC: "LACNIC (Lateinamerika)", AFRINIC: "AFRINIC (Afrika)" },
         about_title: "📖 Was diese Seite zeigt (Legende)",
         about_html: `
-<p><b>Miete (LARUS-API)</b> — monatliche Miete von IPv4-Blöcken /24–/16, live alle 5 Minuten aktualisiert.
+<p><b>Miete (live)</b> — monatliche Miete von IPv4-Blöcken /24–/16, live alle 5 Minuten aktualisiert.
 Zwei Tarife: <b>Base</b> (Capacity Only) — Mindestpreis pro IP, und <b>Production</b> — mit SLA und Produktions-support.</p>
 <p><b>Kauf nach Region</b> — Einmalkaufpreis der Adressen je RIR-Region
 (RIPE NCC — Europa, ARIN — Nordamerika, APNIC — Asien-Pazifik, LACNIC — Lateinamerika, AFRINIC — Afrika):
@@ -310,15 +320,17 @@ Für dauerhaften Verlauf nutzen Sie den lokalen Node-Server oder das Python-Dash
         col_avg: "Moyenne",
         col_max: "Max",
         col_range: "Plage",
-        err_fetch: "Échec du chargement des données depuis l'API LARUS",
-        err_cors: "Requête vers l'API LARUS bloquée (CORS ou réseau). S'il s'agit de la version GitHub Pages, voir le README → « CORS » concernant le proxy de secours.",
-        footer_source: "Source des données : API IPv4 de larus.net · prix d'origine en USD",
+        err_fetch: "Échec du chargement des données depuis l'API de prix",
+        err_cors: "Requête vers l'API de prix bloquée (CORS ou réseau). S'il s'agit de la version GitHub Pages, voir le README → « CORS » concernant le proxy de secours.",
+        footer_source: "Source des données : API publique de marché IPv4 · prix d'origine en USD",
         conv_region: "Région (achat)",
         conv_block: "Sous-réseau",
+        conv_own: "Votre prix / IP",
+        conv_diff: "différence",
         regions: { RIPE: "RIPE NCC (Europe)", ARIN: "ARIN (Amérique du Nord)", APNIC: "APNIC (Asie-Pacifique)", LACNIC: "LACNIC (Amérique latine)", AFRINIC: "AFRINIC (Afrique)" },
         about_title: "📖 Ce que montre cette page (légende)",
         about_html: `
-<p><b>Location (API LARUS)</b> — location mensuelle de blocs IPv4 /24–/16, mise à jour en direct toutes les 5 minutes.
+<p><b>Location (en direct)</b> — location mensuelle de blocs IPv4 /24–/16, mise à jour en direct toutes les 5 minutes.
 Deux offres : <b>Base</b> (Capacity Only) — prix minimum par IP, et <b>Production</b> — avec SLA et support de production.</p>
 <p><b>Achat par région</b> — prix de marché unique des adresses par région RIR
 (RIPE NCC — Europe, ARIN — Amérique du Nord, APNIC — Asie-Pacifique, LACNIC — Amérique latine, AFRINIC — Afrique) :

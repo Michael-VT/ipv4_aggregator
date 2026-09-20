@@ -1,0 +1,26 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Runtime data (SQLite — общее хранилище, не входит в репозиторий)
+*.db
+*.db-wal
+*.db-shm
+*.db.bak
+
+# Node
+node_modules/
+
+# ОС и редакторы
+.DS_Store
+Thumbs.db
+
+# Архивы и логи
+*.zip
+*.log
+grok-ipv4_aggregator-log.txt
+
+# Streamlit
+.streamlit/secrets.toml

@@ -161,9 +161,22 @@ h1 { font-size: 1.25rem; margin: 0; }
 .conv-selects { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 .conv-selects select { font-size: 0.85rem; }
 
+/* Рыночная цена операторов — второй план: мелко, не жирным */
 .conv-price { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
-.conv-main { font-size: 1.15rem; font-weight: 700; }
-.conv-range { font-size: 0.78rem; color: var(--text-dim); }
+.conv-main { font-size: 0.85rem; font-weight: 400; color: var(--text-dim); }
+.conv-range { font-size: 0.75rem; color: var(--text-dim); }
+
+/* Заголовок правой части: "<подсеть> · брокеру N %" */
+.conv-headline { font-size: 0.9rem; display: flex; gap: 0.4rem; align-items: baseline; }
+.conv-headline .strong { font-weight: 700; }
+#conv-fee-head { color: var(--text-dim); font-size: 0.8rem; }
+
+/* Строка расчётов и итоговая сумма */
+.conv-calc { font-size: 0.78rem; color: var(--text-dim); }
+.conv-total { font-size: 1.05rem; font-weight: 700; min-height: 1.3em; }
+
+.fee-label { font-size: 0.78rem; color: var(--text-dim); }
+#conv-fee-input { width: 60px; }
 
 .conv-alts {
     display: flex;
@@ -180,6 +193,15 @@ h1 { font-size: 1.25rem; margin: 0; }
 #conv-own-input {
     font: inherit;
     width: 90px;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text);
+}
+#conv-fee-input {
+    font: inherit;
+    width: 60px;
     padding: 0.3rem 0.5rem;
     border: 1px solid var(--border);
     border-radius: 8px;

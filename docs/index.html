@@ -62,10 +62,18 @@
                     <div id="conv-alts" class="conv-alts"></div>
                 </div>
                 <div class="conv-right">
+                    <div class="conv-headline">
+                        <span id="conv-subnet" class="strong">/24</span>
+                        <span id="conv-fee-head"></span>
+                    </div>
                     <div class="conv-own">
                         <label for="conv-own-input" id="conv-own-label">Your price / IP</label>
                         <input id="conv-own-input" type="number" min="0" step="0.01" placeholder="0.00" inputmode="decimal">
+                        <label for="conv-fee-input" id="conv-fee-label" class="fee-label">Broker, %</label>
+                        <input id="conv-fee-input" type="number" min="0" step="0.1" value="1" inputmode="decimal">
                     </div>
+                    <div id="conv-calc" class="conv-calc"></div>
+                    <div id="conv-total" class="conv-total"></div>
                     <div id="conv-own-alts" class="conv-alts"></div>
                     <div id="conv-diff" class="conv-diff"></div>
                 </div>

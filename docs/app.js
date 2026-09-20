@@ -204,10 +204,9 @@
     function renderConverter() {
         var curSym = SYMBOLS[state.currency] || "$";
         var curRate = state.rates[state.currency] || 1;
-        // Подпись поля своей цены с символом текущей валюты
-        $("conv-own-label").textContent = t("conv_own") +
-            " (" + (state.currency === "PLN" ? "" : curSym) + state.currency +
-            (state.currency === "PLN" ? " " + curSym : "") + ")";
+        // Подписи полей своей цены и комиссии брокера
+        $("conv-own-label").textContent = t("conv_own") + " (" + state.currency + ")";
+        $("conv-fee-label").textContent = t("conv_fee");
         var regionSel = $("conv-region");
         var blockSel = $("conv-block");
         var regions = t("regions") || {};
@@ -260,36 +259,69 @@
             $("conv-alts").innerHTML = "";
         }
 
-        // --- Своя цена за IP: пересчёт во все валюты + разница с рынком ---
+        // --- Своя цена за IP + процент брокеру за /24: расчёт и итог ---
         var ownOut = $("conv-own-alts");
         var diffEl = $("conv-diff");
+        var calcEl = $("conv-calc");
+        var totalEl = $("conv-total");
         ownOut.innerHTML = "";
         diffEl.textContent = "";
         diffEl.className = "conv-diff";
+        calcEl.textContent = "";
+        totalEl.textContent = "";
+
+        // Заголовок: "<подсеть> · брокеру N %"
+        var feePct = parseFloat($("conv-fee-input").value);
+        if (!(feePct > 0)) feePct = 0;
+        $("conv-subnet").textContent = state.convBlock;
+        $("conv-fee-head").textContent = "· " + t("conv_fee_head") + " " + feePct.toFixed(1) + " %";
+
+        function cur2(v) {
+            return state.currency === "PLN"
+                ? v.toFixed(2) + " " + curSym
+                : curSym + v.toFixed(2);
+        }
 
         var own = parseFloat($("conv-own-input").value);
-        if (own > 0 && p) {
-            // Своя цена задана в выбранной валюте → пересчёт в остальные
+        if (own > 0) {
+            var ips = 256; // подсеть конвертера всегда /24-сетка: 256 IP на /24-блоке
+            // Блок конвертера выбирается как /24…/16; считаем от его размера
+            var blk = BLOCKS.find(function (b) { return b.size === state.convBlock; });
+            ips = blk ? blk.ips : 256;
+
+            var sum24 = own * ips;               // сумма за подсеть
+            var feeIp = own * feePct / 100;      // комиссия брокера за 1 IP
+            var fee24 = sum24 * feePct / 100;    // комиссия за всю подсеть
+            var total24 = sum24 + fee24;         // итог: подсеть + комиссия
+            var perIpTotal = own + feeIp;        // цена за IP с комиссией
+
+            calcEl.textContent = t("conv_sum24") + " = " + cur2(sum24) +
+                " · " + t("conv_fee_ip") + " = " + cur2(feeIp) +
+                " · " + t("conv_fee24") + " = " + cur2(fee24);
+            totalEl.textContent = t("conv_total24") + " = " + cur2(total24) +
+                " (" + ips + " IP)";
+
+            // Цена за IP с комиссией — в альтернативных валютах
             Object.keys(SYMBOLS).forEach(function (cur) {
                 if (cur === state.currency) return;
-                var v = own * (state.rates[cur] || 1) / curRate;
+                var v = perIpTotal * (state.rates[cur] || 1) / curRate;
                 var s = Number(v).toFixed(2);
                 var text = cur === "PLN" ? s + " " + SYMBOLS[cur] : SYMBOLS[cur] + s;
                 var span = document.createElement("span");
                 span.textContent = cur + " " + text;
                 ownOut.appendChild(span);
             });
-            // Разница: своя цена против рыночной средней (в выбранной валюте)
-            var market = p.avg * curRate;
-            var d = own - market;
-            var pct = market > 0 ? Math.round(d / market * 100) : 0;
-            var sign = d >= 0 ? "+" : "−";
-            diffEl.textContent = t("conv_diff") + ": " + sign +
-                (state.currency === "PLN" ? "" : curSym) +
-                Math.abs(d).toFixed(2) +
-                (state.currency === "PLN" ? " " + curSym : "") +
-                " (" + sign + Math.abs(pct) + "%)";
-            diffEl.classList.add(d >= 0 ? "conv-diff-neg" : "conv-diff-pos");
+
+            // Разница: цена за IP с комиссией против рыночной средней
+            if (p) {
+                var market = p.avg * curRate;
+                var d = perIpTotal - market;
+                var pct = market > 0 ? Math.round(d / market * 100) : 0;
+                var sign = d >= 0 ? "+" : "−";
+                diffEl.textContent = t("conv_diff") + ": " + sign + cur2(Math.abs(d)).replace("-", "") +
+                    " (" + sign + Math.abs(pct) + "%)";
+                diffEl.classList.add(d >= 0 ? "conv-diff-neg" : "conv-diff-pos");
+            }
         }
     }
 

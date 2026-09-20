@@ -25,26 +25,28 @@
 
     <main class="container">
         <section class="controls">
-            <div class="control">
-                <label for="location-select" data-i18n="location_label">API location</label>
-                <select id="location-select">
-                    <option value="US">US</option>
-                    <option value="EU">EU</option>
-                </select>
-            </div>
-            <div class="control">
-                <label for="currency-select" data-i18n="currency_label">Currency</label>
-                <select id="currency-select">
-                    <option value="USD" selected>USD $</option>
-                    <option value="EUR">EUR €</option>
-                    <option value="GBP">GBP £</option>
-                    <option value="PLN">PLN zł</option>
-                    <option value="UAH">UAH ₴</option>
-                </select>
-                <span id="rates-note" class="note hidden"></span>
-            </div>
-            <div class="control">
-                <button id="refresh-btn" data-i18n="refresh_now">🔄 Refresh now</button>
+            <div class="controls-col">
+                <div class="control">
+                    <label for="location-select" data-i18n="location_label">API location</label>
+                    <select id="location-select">
+                        <option value="US">US</option>
+                        <option value="EU">EU</option>
+                    </select>
+                </div>
+                <div class="control">
+                    <label for="currency-select" data-i18n="currency_label">Currency</label>
+                    <select id="currency-select">
+                        <option value="USD" selected>USD $</option>
+                        <option value="EUR">EUR €</option>
+                        <option value="GBP">GBP £</option>
+                        <option value="PLN">PLN zł</option>
+                        <option value="UAH">UAH ₴</option>
+                    </select>
+                    <span id="rates-note" class="note hidden"></span>
+                </div>
+                <div class="control">
+                    <button id="refresh-btn" data-i18n="refresh_now">🔄 Refresh now</button>
+                </div>
             </div>
 
             <!-- Конвертер: регион + подсеть → цена, пересчёт в другие валюты

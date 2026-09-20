@@ -17,6 +17,9 @@ node_modules/
 .DS_Store
 Thumbs.db
 
+# Локальные настройки Claude Code
+.claude/
+
 # Архивы и логи
 *.zip
 *.log

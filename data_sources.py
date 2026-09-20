@@ -3,8 +3,8 @@
 """
 
 import requests
-from typing import Dict
-from datetime import datetime
+from typing import Dict, Optional
+from datetime import datetime, timezone
 
 # ====================== LARUS Live Lease API ======================
 
@@ -55,7 +55,7 @@ def fetch_larus_lease_prices(location: str = "US") -> Dict:
                     "production_per_ip": float(production.get("final_unit_price", 0)),
                     "production_total": float(production.get("monthly_total", 0)),
                     "source": "LARUS",
-                    "fetched_at": datetime.utcnow().isoformat(),
+                    "fetched_at": datetime.now(timezone.utc).isoformat(),
                 }
             else:
                 results[f"{block_size}"] = {"error": "API returned non-success"}
@@ -128,7 +128,7 @@ PURCHASE_PRICES = {
 }
 
 
-def get_purchase_prices(region: str = None) -> Dict:
+def get_purchase_prices(region: Optional[str] = None) -> Dict:
     """Возвращает цены покупки. Если region указан — только его."""
     if region and region in PURCHASE_PRICES:
         return {region: PURCHASE_PRICES[region]}

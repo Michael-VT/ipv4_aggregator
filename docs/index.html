@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="IPv4 price monitoring — live lease prices from the LARUS API">
+    <meta name="description" content="IPv4 price monitoring — live lease prices from the LARUS API and market purchase prices per RIR region">
     <title>IPv4 Price Aggregator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -32,32 +32,57 @@
                 </select>
             </div>
             <div class="control">
+                <label for="currency-select" data-i18n="currency_label">Currency</label>
+                <select id="currency-select">
+                    <option value="USD" selected>USD $</option>
+                    <option value="EUR">EUR €</option>
+                    <option value="GBP">GBP £</option>
+                    <option value="PLN">PLN zł</option>
+                    <option value="UAH">UAH ₴</option>
+                </select>
+                <span id="rates-note" class="note hidden"></span>
+            </div>
+            <div class="control">
                 <button id="refresh-btn" data-i18n="refresh_now">🔄 Refresh now</button>
             </div>
         </section>
 
-        <section class="chips" id="block-chips" aria-label="Block size"></section>
-
-        <section class="metrics" id="metrics"></section>
+        <!-- Легенда / краткое описание -->
+        <details class="card about" id="about-card">
+            <summary data-i18n="about_title">📖 What this page shows</summary>
+            <div id="about-body" class="about-body"></div>
+        </details>
 
         <section class="card">
-            <h2 data-i18n="table_title">Current prices by block</h2>
+            <h2 data-i18n="table_title">Current lease prices by block</h2>
+            <div class="chips" id="block-chips" aria-label="Block size"></div>
+            <div class="metrics" id="metrics"></div>
             <div class="table-wrap">
                 <table id="price-table">
                     <thead></thead>
                     <tbody></tbody>
                 </table>
             </div>
-        </section>
-
-        <section class="card">
-            <h2 data-i18n="chart_lease">Base vs Production ($/IP/month)</h2>
             <div class="chart-wrap"><canvas id="chart-lease"></canvas></div>
             <div id="chart-lease-fallback" class="table-wrap hidden"></div>
         </section>
 
         <section class="card">
-            <h2 id="history-title" data-i18n="chart_history">Price history</h2>
+            <h2 data-i18n="purchase_title">Purchase prices by region</h2>
+            <p class="note" data-i18n="purchase_hint"></p>
+            <div class="chips" id="region-chips" aria-label="Region"></div>
+            <div class="table-wrap">
+                <table id="purchase-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="chart-wrap"><canvas id="chart-purchase"></canvas></div>
+            <div id="chart-purchase-fallback" class="table-wrap hidden"></div>
+        </section>
+
+        <section class="card">
+            <h2 id="history-title" data-i18n="chart_history">Lease history</h2>
             <p id="history-note" class="note"></p>
             <div class="chart-wrap"><canvas id="chart-history"></canvas></div>
             <div id="chart-history-fallback" class="table-wrap hidden"></div>
@@ -65,9 +90,9 @@
     </main>
 
     <footer class="footer">
-        <span data-i18n="footer_source">Data source: larus.net IPv4 API · prices in USD</span>
+        <span data-i18n="footer_source">Data source: larus.net IPv4 API · source prices in USD</span>
         ·
-        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/Michael-VT/ipv4_aggregator" target="_blank" rel="noopener">GitHub</a>
     </footer>
 
     <!-- Chart.js через CDN (pinned); при недоступности CDN интерфейс
@@ -76,6 +101,7 @@
             integrity="sha384-vsrfeLOOY6KuIYKDlmVH5UiBmgIdB1oEf7p01YgWHuqmOHfZr374+odEv96n9tNC"
             crossorigin="anonymous"></script>
     <script src="i18n.js"></script>
+    <script src="purchase_data.js"></script>
     <script src="app.js"></script>
 </body>
 </html>

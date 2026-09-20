@@ -1,0 +1,230 @@
+/* IPv4 Price Aggregator — mobile-first, светлая и тёмная темы */
+
+:root {
+    --bg: #f5f6f8;
+    --card-bg: #ffffff;
+    --text: #1c2430;
+    --text-dim: #5b6675;
+    --border: #dde2e9;
+    --accent: #2f6fed;
+    --green: #2ecc71;
+    --orange: #f39c12;
+    --badge-bg: #eef4ff;
+    --banner-bg: #fdecea;
+    --banner-text: #b3261e;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #12161c;
+        --card-bg: #1b212b;
+        --text: #e6eaf0;
+        --text-dim: #97a1af;
+        --border: #2c3441;
+        --accent: #6ea0ff;
+        --badge-bg: #1e2a45;
+        --banner-bg: #3a1f1c;
+        --banner-text: #ff8a80;
+    }
+}
+
+* { box-sizing: border-box; }
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+.hidden { display: none !important; }
+
+/* ---------- Шапка ---------- */
+.header {
+    padding: 0.75rem 1rem;
+    background: var(--card-bg);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+h1 { font-size: 1.25rem; margin: 0; }
+
+.meta-row {
+    margin-top: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+.badge {
+    background: var(--badge-bg);
+    color: var(--accent);
+    padding: 0.15rem 0.6rem;
+    border-radius: 999px;
+    font-weight: 600;
+}
+
+.badge-local { background: #e8f8ef; color: #1e8e4e; }
+@media (prefers-color-scheme: dark) {
+    .badge-local { background: #163426; color: #5ddb8f; }
+}
+
+.next-refresh { font-variant-numeric: tabular-nums; }
+
+#lang-select, #location-select {
+    font: inherit;
+    padding: 0.3rem 0.5rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text);
+}
+
+/* ---------- Контейнер ---------- */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0.75rem 1rem 2rem;
+}
+
+/* ---------- Управление ---------- */
+.controls {
+    display: flex;
+    gap: 0.75rem;
+    align-items: end;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.control { display: flex; flex-direction: column; gap: 0.25rem; }
+.control label { font-size: 0.8rem; color: var(--text-dim); }
+
+#refresh-btn {
+    font: inherit;
+    padding: 0.45rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--card-bg);
+    color: var(--text);
+    cursor: pointer;
+}
+#refresh-btn:active { transform: scale(0.97); }
+
+/* ---------- Чипы размеров блоков ---------- */
+.chips {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+}
+
+.chip {
+    font: inherit;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.7rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--text-dim);
+    cursor: pointer;
+}
+
+.chip.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* ---------- Карточки метрик ---------- */
+.metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.6rem;
+    margin-bottom: 0.75rem;
+}
+
+.metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.7rem 0.9rem;
+}
+
+.metric-value { font-size: 1.3rem; font-weight: 700; }
+.metric-label { font-size: 0.78rem; color: var(--text-dim); }
+
+/* ---------- Карточки-секции ---------- */
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.card h2 { font-size: 1.02rem; margin: 0 0 0.6rem; }
+
+.note { font-size: 0.82rem; color: var(--text-dim); margin: 0 0 0.6rem; }
+
+.chart-wrap {
+    position: relative;
+    height: 300px;
+}
+
+/* ---------- Таблицы ---------- */
+.table-wrap { overflow-x: auto; }
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.45rem 0.6rem;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+th { color: var(--text-dim); font-weight: 600; font-size: 0.78rem; }
+td.strong { font-weight: 700; }
+tbody tr:last-child td { border-bottom: none; }
+
+/* ---------- Баннер ошибки ---------- */
+.banner {
+    background: var(--banner-bg);
+    color: var(--banner-text);
+    padding: 0.6rem 1rem;
+    font-size: 0.88rem;
+}
+
+/* ---------- Подвал ---------- */
+.footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+    padding: 1rem;
+}
+
+a { color: var(--accent); }
+
+/* ---------- Узкие экраны ---------- */
+@media (max-width: 640px) {
+    body { font-size: 14px; }
+    h1 { font-size: 1.1rem; }
+    .container { padding: 0.6rem 0.6rem 1.5rem; }
+    .metric-value { font-size: 1.1rem; }
+    .chart-wrap { height: 240px; }
+    .header { padding: 0.6rem 0.6rem; }
+}

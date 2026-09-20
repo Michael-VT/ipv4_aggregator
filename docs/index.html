@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="IPv4 price monitoring — live lease prices from the LARUS API">
+    <title>IPv4 Price Aggregator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-row">
+            <h1 data-i18n="app_title">📡 IPv4 Price Aggregator</h1>
+            <select id="lang-select" aria-label="Language"></select>
+        </div>
+        <div class="header-row meta-row">
+            <span id="mode-badge" class="badge" data-i18n="mode_session">Session monitoring</span>
+            <span id="db-info" class="db-info hidden"></span>
+            <span id="next-refresh" class="next-refresh"></span>
+        </div>
+    </header>
+
+    <div id="error-banner" class="banner hidden"></div>
+
+    <main class="container">
+        <section class="controls">
+            <div class="control">
+                <label for="location-select" data-i18n="location_label">API location</label>
+                <select id="location-select">
+                    <option value="US">US</option>
+                    <option value="EU">EU</option>
+                </select>
+            </div>
+            <div class="control">
+                <button id="refresh-btn" data-i18n="refresh_now">🔄 Refresh now</button>
+            </div>
+        </section>
+
+        <section class="chips" id="block-chips" aria-label="Block size"></section>
+
+        <section class="metrics" id="metrics"></section>
+
+        <section class="card">
+            <h2 data-i18n="table_title">Current prices by block</h2>
+            <div class="table-wrap">
+                <table id="price-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card">
+            <h2 data-i18n="chart_lease">Base vs Production ($/IP/month)</h2>
+            <div class="chart-wrap"><canvas id="chart-lease"></canvas></div>
+            <div id="chart-lease-fallback" class="table-wrap hidden"></div>
+        </section>
+
+        <section class="card">
+            <h2 id="history-title" data-i18n="chart_history">Price history</h2>
+            <p id="history-note" class="note"></p>
+            <div class="chart-wrap"><canvas id="chart-history"></canvas></div>
+            <div id="chart-history-fallback" class="table-wrap hidden"></div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <span data-i18n="footer_source">Data source: larus.net IPv4 API · prices in USD</span>
+        ·
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+    </footer>
+
+    <!-- Chart.js через CDN (pinned); при недоступности CDN интерфейс
+         автоматически переключается на текстовые таблицы -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"
+            integrity="sha384-vsrfeLOOY6KuIYKDlmVH5UiBmgIdB1oEf7p01YgWHuqmOHfZr374+odEv96n9tNC"
+            crossorigin="anonymous"></script>
+    <script src="i18n.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

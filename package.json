@@ -1,0 +1,14 @@
+{
+    "name": "ipv4-price-aggregator",
+    "version": "2.0.0",
+    "description": "IPv4 price monitoring: local Node.js server collecting LARUS lease prices into a shared SQLite database",
+    "private": true,
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "engines": {
+        "node": ">=22.5.0"
+    },
+    "license": "MIT"
+}

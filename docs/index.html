@@ -82,19 +82,8 @@
             </div>
         </section>
 
-        <section class="card">
-            <h2 data-i18n="table_title">Current lease prices by block</h2>
-            <div class="chips" id="block-chips" aria-label="Block size"></div>
-            <div class="metrics" id="metrics"></div>
-            <div class="table-wrap">
-                <table id="price-table">
-                    <thead></thead>
-                    <tbody></tbody>
-                </table>
-            </div>
-            <div class="chart-wrap"><canvas id="chart-lease"></canvas></div>
-            <div id="chart-lease-fallback" class="table-wrap hidden"></div>
-        </section>
+        <!-- Выбор размера подсети — общая строка вверху страницы -->
+        <div class="chips" id="block-chips" aria-label="Block size"></div>
 
         <section class="card">
             <h2 data-i18n="purchase_title">Purchase prices by region</h2>
@@ -108,6 +97,19 @@
             </div>
             <div class="chart-wrap"><canvas id="chart-purchase"></canvas></div>
             <div id="chart-purchase-fallback" class="table-wrap hidden"></div>
+        </section>
+
+        <section class="card">
+            <h2 data-i18n="table_title">Current lease prices by block</h2>
+            <div class="metrics" id="metrics"></div>
+            <div class="table-wrap">
+                <table id="price-table">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <div class="chart-wrap"><canvas id="chart-lease"></canvas></div>
+            <div id="chart-lease-fallback" class="table-wrap hidden"></div>
         </section>
 
         <section class="card">

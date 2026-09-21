@@ -301,14 +301,22 @@
             totalEl.textContent = t("conv_total24") + " = " + cur2(total24) +
                 " (" + ips + " IP)";
 
-            // Цена за IP с комиссией — в альтернативных валютах
-            Object.keys(SYMBOLS).forEach(function (cur) {
+            // Цена с комиссией — только USD и EUR (валюты брокера):
+            // за 1 IP и за всю подсеть
+            ["USD", "EUR"].forEach(function (cur) {
                 if (cur === state.currency) return;
-                var v = perIpTotal * (state.rates[cur] || 1) / curRate;
-                var s = Number(v).toFixed(2);
-                var text = cur === "PLN" ? s + " " + SYMBOLS[cur] : SYMBOLS[cur] + s;
+                var rate = state.rates[cur] || 1;
+                var vIp = perIpTotal * rate / curRate;
+                var vSub = total24 * rate / curRate;
+                var loc = { minimumFractionDigits: 2, maximumFractionDigits: 2 };
+                var sym = SYMBOLS[cur];
+                var fmt = function (v) {
+                    var s = Number(v).toLocaleString(state.lang, loc);
+                    return cur === "PLN" ? s + " " + sym : sym + s;
+                };
                 var span = document.createElement("span");
-                span.textContent = cur + " " + text;
+                span.textContent = cur + ": " + fmt(vIp) + " / IP · " +
+                    fmt(vSub) + " / " + state.convBlock;
                 ownOut.appendChild(span);
             });
 

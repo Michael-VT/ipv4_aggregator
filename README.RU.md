@@ -19,6 +19,8 @@ RIR, с историей, графиками и интерфейсом на 6 я
 
 ---
 
+> ✅ **Статус (2026-09-21):** проверено и размещено на GitHub Pages — <https://michael-vt.github.io/ipv4_aggregator/>
+
 ## Language / Мова / Язык
 
 [English](README.md) · [Українська](README.UA.md) · [Русский](README.RU.md) ·

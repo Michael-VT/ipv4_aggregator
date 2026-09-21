@@ -164,12 +164,17 @@ st.title(t("app_title"))
 st.caption(t("caption_updated").format(ts=datetime.now().strftime("%Y-%m-%d %H:%M")))
 
 # ---------- Вкладки ----------
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     t("tab_lease"),
     t("tab_purchase"),
     t("tab_history"),
+    t("tab_calc"),
     t("tab_about"),
 ])
+
+# Количество IP в блоке — для калькулятора подсети
+BLOCK_IPS = {"/24": 256, "/23": 512, "/22": 1024, "/21": 2048, "/20": 4096,
+             "/19": 8192, "/18": 16384, "/17": 32768, "/16": 65536}
 
 # ====================== TAB 1: Аренда ======================
 
@@ -392,6 +397,59 @@ with tab3:
     else:
         st.info(t("empty_purchase"))
 
-# ====================== TAB 4: О проекте ======================
+# ====================== TAB: Калькулятор ======================
 with tab4:
+    st.subheader(t("tab_calc"))
+
+    # Рыночная средняя цена выбранного региона/блока — второй план
+    purchase_data_all = load_purchase_data()
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        calc_block = st.selectbox(t("conv_block"), block_sizes, index=0)
+    with col2:
+        calc_region = st.selectbox(
+            t("conv_region"),
+            get_all_regions(),
+            format_func=region_display,
+        )
+    with col3:
+        own_price = st.number_input(t("conv_own"), min_value=0.0, value=0.0, step=0.01)
+    with col4:
+        lawyer_pct = st.number_input(t("conv_fee"), min_value=0.0, value=1.0, step=0.1)
+
+    ips = BLOCK_IPS[calc_block]
+    sum_sub = own_price * ips
+    fee_ip = own_price * lawyer_pct / 100
+    fee_sub = sum_sub * lawyer_pct / 100
+    total_sub = sum_sub + fee_sub
+    per_ip_total = own_price + fee_ip
+
+    # Рыночная средняя для сравнения (второй план, мелко)
+    market_avg = purchase_data_all.get(calc_region, {}).get(calc_block, {}).get("avg")
+    if market_avg:
+        st.caption(t("purchase_chart_title").format(region=region_display(calc_region)) +
+                   f" — ${market_avg:.2f} ({t('col_min')} ${purchase_data_all[calc_region][calc_block]['min']:.2f}" +
+                   f" – {t('col_max')} ${purchase_data_all[calc_region][calc_block]['max']:.2f})")
+
+    if own_price > 0:
+        m1, m2, m3, m4 = st.columns(4)
+        m1.metric(t("conv_sum24"), f"${sum_sub:,.2f}", f"{ips:,} IP")
+        m2.metric(t("conv_fee_ip"), f"${fee_ip:,.2f}")
+        m3.metric(t("conv_fee24"), f"${fee_sub:,.2f}")
+        m4.metric(t("conv_total24"), f"${total_sub:,.2f}")
+
+        if market_avg:
+            diff = per_ip_total - market_avg
+            pct = diff / market_avg * 100 if market_avg else 0
+            sign = "+" if diff >= 0 else "−"
+            st.markdown(
+                f"**{t('conv_diff')}:** {sign}${abs(diff):,.2f} ({sign}{abs(pct):.0f}%)",
+                unsafe_allow_html=False,
+            )
+    else:
+        st.info(t("conv_own") + " > 0")
+
+# ====================== TAB: О проекте ======================
+with tab5:
     st.markdown(t("about_md"))

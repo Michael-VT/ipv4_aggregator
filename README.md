@@ -19,6 +19,8 @@ sidebar; the web variants have one in the header. The choice is remembered.
 
 ---
 
+> ✅ **Status (2026-09-21):** verified and live on GitHub Pages — <https://michael-vt.github.io/ipv4_aggregator/>
+
 ## Language / Мова / Язык
 
 [English](README.md) · [Українська](README.UA.md) · [Русский](README.RU.md) ·

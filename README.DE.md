@@ -20,6 +20,8 @@ gespeichert.
 
 ---
 
+> ✅ **Status (2026-09-21):** geprüft und auf GitHub Pages veröffentlicht — <https://michael-vt.github.io/ipv4_aggregator/>
+
 ## Language / Мова / Язык
 
 [English](README.md) · [Українська](README.UA.md) · [Русский](README.RU.md) ·

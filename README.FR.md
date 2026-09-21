@@ -20,6 +20,8 @@ est mémorisé.
 
 ---
 
+> ✅ **Statut (2026-09-21) :** vérifié et publié sur GitHub Pages — <https://michael-vt.github.io/ipv4_aggregator/>
+
 [English](README.md) · [Українська](README.UA.md) · [Русский](README.RU.md) · [Português](README.PT.md) · [Deutsch](README.DE.md) · [Français](README.FR.md)
 
 ---

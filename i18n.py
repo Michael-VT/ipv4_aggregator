@@ -22,13 +22,25 @@ _DEFAULT = "en"
 STRINGS = {
     # ============================== ENGLISH ==============================
     "en": {
+
+        "tab_calc": "🧮 Calculator",
+        "conv_region": "Region (purchase)",
+        "conv_block": "Subnet",
+        "conv_own": "Your price / IP",
+        "conv_fee": "Lawyer percent",
+        "conv_fee_head": "lawyer",
+        "conv_sum24": "Sum/subnet",
+        "conv_fee_ip": "fee/IP",
+        "conv_fee24": "fee/subnet",
+        "conv_total24": "Sum + fee",
+        "conv_diff": "difference",
         "lang_label": "🌐 Language",
         "sidebar_region": "Region (purchase)",
         "region_all": "All regions",
         "sidebar_blocks": "Block sizes for charts",
         "sidebar_autorefresh": "Auto-refresh (every 5 min)",
         "sidebar_sources_title": "Sources",
-        "src_lease": "- **Lease**: LARUS Live API",
+        "src_lease": "- **Lease**: live price API",
         "src_purchase": "- **Purchase**: IPv4Center + market reports",
         "src_history": "- **History**: local SQLite",
         "btn_refresh": "🔄 Refresh data now",
@@ -38,7 +50,7 @@ STRINGS = {
         "tab_purchase": "🔵 Purchase by region",
         "tab_history": "📈 History & charts",
         "tab_about": "ℹ️ About",
-        "lease_header": "Live IPv4 lease prices (LARUS)",
+        "lease_header": "Live IPv4 lease prices",
         "api_location": "API location",
         "col_block": "Block",
         "col_ips": "IP count",
@@ -52,8 +64,8 @@ STRINGS = {
         "trace_base": "Base (Capacity Only)",
         "trace_prod": "Production",
         "saved_caption": "Last saved to history: {ts} UTC",
-        "err_larus": "Failed to load data from the LARUS API",
-        "spinner_lease": "Loading live lease prices from LARUS...",
+        "err_larus": "Failed to load data from the price API",
+        "spinner_lease": "Loading live lease prices...",
         "purchase_header": "Average IPv4 purchase prices by region",
         "col_min": "Min $",
         "col_avg": "Avg $",
@@ -64,7 +76,7 @@ STRINGS = {
         "history_header": "Price history and dynamics",
         "days_slider": "History period (days)",
         "hist_block_select": "Block size for lease history",
-        "lease_dynamics": "Lease dynamics (LARUS)",
+        "lease_dynamics": "Lease dynamics (live)",
         "trace_base_ip": "Base $/IP",
         "trace_prod_ip": "Production $/IP",
         "lease_hist_title": "Lease history {block}",
@@ -90,7 +102,7 @@ This dashboard collects current IPv4 block prices from open sources:
 
 | Source | Data type | Update |
 |--------|-----------|--------|
-| **LARUS API** | Lease (live) | every 5 minutes |
+| **Price API** | Lease (live) | every 5 minutes |
 | **IPv4Center / market reports** | Purchase | manual + snapshots |
 | **Local SQLite** | History | on every refresh |
 
@@ -124,13 +136,25 @@ node server.js            # http://localhost:8787
 
     # ============================== УКРАЇНСЬКА ==============================
     "ua": {
+
+        "tab_calc": "🧮 Калькулятор",
+        "conv_region": "Регіон (купівля)",
+        "conv_block": "Підмережа",
+        "conv_own": "Ваша ціна / IP",
+        "conv_fee": "Відсоток юриста",
+        "conv_fee_head": "юристу",
+        "conv_sum24": "Сума/підмережа",
+        "conv_fee_ip": "коміс./IP",
+        "conv_fee24": "коміс./підмережа",
+        "conv_total24": "Сума + коміс.",
+        "conv_diff": "різниця",
         "lang_label": "🌐 Мова",
         "sidebar_region": "Регіон (купівля)",
         "region_all": "Усі регіони",
         "sidebar_blocks": "Розміри блоків для графіків",
         "sidebar_autorefresh": "Автооновлення (кожні 5 хв)",
         "sidebar_sources_title": "Джерела",
-        "src_lease": "- **Оренда**: LARUS Live API",
+        "src_lease": "- **Оренда**: живе API цін",
         "src_purchase": "- **Купівля**: IPv4Center + ринкові звіти",
         "src_history": "- **Історія**: локальний SQLite",
         "btn_refresh": "🔄 Оновити дані зараз",
@@ -140,7 +164,7 @@ node server.js            # http://localhost:8787
         "tab_purchase": "🔵 Купівля за регіонами",
         "tab_history": "📈 Історія та графіки",
         "tab_about": "ℹ️ Про проєкт",
-        "lease_header": "Живі ціни оренди IPv4 (LARUS)",
+        "lease_header": "Живі ціни оренди IPv4",
         "api_location": "Локація API",
         "col_block": "Блок",
         "col_ips": "Кількість IP",
@@ -154,8 +178,8 @@ node server.js            # http://localhost:8787
         "trace_base": "Base (Capacity Only)",
         "trace_prod": "Production",
         "saved_caption": "Останнє збереження в історію: {ts} UTC",
-        "err_larus": "Не вдалося завантажити дані з LARUS API",
-        "spinner_lease": "Завантажую живі ціни оренди з LARUS...",
+        "err_larus": "Не вдалося завантажити дані з API цін",
+        "spinner_lease": "Завантажую живі ціни оренди...",
         "purchase_header": "Середні ціни купівлі IPv4 за регіонами",
         "col_min": "Мін $",
         "col_avg": "Середнє $",
@@ -166,7 +190,7 @@ node server.js            # http://localhost:8787
         "history_header": "Історія цін і динаміка",
         "days_slider": "Період історії (днів)",
         "hist_block_select": "Розмір блоку для історії оренди",
-        "lease_dynamics": "Динаміка оренди (LARUS)",
+        "lease_dynamics": "Динаміка оренди (live)",
         "trace_base_ip": "Base $/IP",
         "trace_prod_ip": "Production $/IP",
         "lease_hist_title": "Історія оренди {block}",
@@ -192,7 +216,7 @@ node server.js            # http://localhost:8787
 
 | Джерело | Тип даних | Оновлення |
 |---------|-----------|-----------|
-| **LARUS API** | Оренда (live) | кожні 5 хвилин |
+| **API цін** | Оренда (live) | кожні 5 хвилин |
 | **IPv4Center / ринкові звіти** | Купівля | вручну + збереження знімків |
 | **Локальний SQLite** | Історія | при кожному оновленні |
 
@@ -226,13 +250,25 @@ node server.js            # http://localhost:8787
 
     # ============================== РУССКИЙ ==============================
     "ru": {
+
+        "tab_calc": "🧮 Калькулятор",
+        "conv_region": "Регион (покупка)",
+        "conv_block": "Подсеть",
+        "conv_own": "Ваша цена / IP",
+        "conv_fee": "Процент юриста",
+        "conv_fee_head": "юристу",
+        "conv_sum24": "Сумма/подсеть",
+        "conv_fee_ip": "комис./IP",
+        "conv_fee24": "комис./подсеть",
+        "conv_total24": "Сумма + комис.",
+        "conv_diff": "разница",
         "lang_label": "🌐 Язык",
         "sidebar_region": "Регион (покупка)",
         "region_all": "Все регионы",
         "sidebar_blocks": "Размеры блоков для графиков",
         "sidebar_autorefresh": "Автообновление (каждые 5 мин)",
         "sidebar_sources_title": "Источники",
-        "src_lease": "- **Аренда**: LARUS Live API",
+        "src_lease": "- **Аренда**: живой API цен",
         "src_purchase": "- **Покупка**: IPv4Center + рыночные отчёты",
         "src_history": "- **История**: локальный SQLite",
         "btn_refresh": "🔄 Обновить данные сейчас",
@@ -242,7 +278,7 @@ node server.js            # http://localhost:8787
         "tab_purchase": "🔵 Покупка по регионам",
         "tab_history": "📈 История и графики",
         "tab_about": "ℹ️ О проекте",
-        "lease_header": "Живые цены аренды IPv4 (LARUS)",
+        "lease_header": "Живые цены аренды IPv4",
         "api_location": "Локация API",
         "col_block": "Блок",
         "col_ips": "Количество IP",
@@ -256,8 +292,8 @@ node server.js            # http://localhost:8787
         "trace_base": "Base (Capacity Only)",
         "trace_prod": "Production",
         "saved_caption": "Последнее сохранение в историю: {ts} UTC",
-        "err_larus": "Не удалось загрузить данные с LARUS API",
-        "spinner_lease": "Загружаю живые цены аренды с LARUS...",
+        "err_larus": "Не удалось загрузить данные с API цен",
+        "spinner_lease": "Загружаю живые цены аренды...",
         "purchase_header": "Средние цены покупки IPv4 по регионам",
         "col_min": "Мин $",
         "col_avg": "Среднее $",
@@ -268,7 +304,7 @@ node server.js            # http://localhost:8787
         "history_header": "История цен и динамика",
         "days_slider": "Период истории (дней)",
         "hist_block_select": "Размер блока для истории аренды",
-        "lease_dynamics": "Динамика аренды (LARUS)",
+        "lease_dynamics": "Динамика аренды (live)",
         "trace_base_ip": "Base $/IP",
         "trace_prod_ip": "Production $/IP",
         "lease_hist_title": "История аренды {block}",
@@ -294,7 +330,7 @@ node server.js            # http://localhost:8787
 
 | Источник | Тип данных | Обновление |
 |----------|------------|------------|
-| **LARUS API** | Аренда (live) | каждые 5 минут |
+| **API цен** | Аренда (live) | каждые 5 минут |
 | **IPv4Center / рыночные отчёты** | Покупка | вручную + сохранение снимков |
 | **Локальный SQLite** | История | при каждом обновлении |
 
@@ -328,13 +364,25 @@ node server.js            # http://localhost:8787
 
     # ============================== PORTUGUÊS ==============================
     "pt": {
+
+        "tab_calc": "🧮 Calculadora",
+        "conv_region": "Região (compra)",
+        "conv_block": "Sub-rede",
+        "conv_own": "Seu preço / IP",
+        "conv_fee": "Percentual do advogado",
+        "conv_fee_head": "advogado",
+        "conv_sum24": "Soma/sub-rede",
+        "conv_fee_ip": "taxa/IP",
+        "conv_fee24": "taxa/sub-rede",
+        "conv_total24": "Soma + taxa",
+        "conv_diff": "diferença",
         "lang_label": "🌐 Idioma",
         "sidebar_region": "Região (compra)",
         "region_all": "Todas as regiões",
         "sidebar_blocks": "Tamanhos de bloco para os gráficos",
         "sidebar_autorefresh": "Atualização automática (a cada 5 min)",
         "sidebar_sources_title": "Fontes",
-        "src_lease": "- **Arrendamento**: LARUS Live API",
+        "src_lease": "- **Arrendamento**: API de preços em tempo real",
         "src_purchase": "- **Compra**: IPv4Center + relatórios de mercado",
         "src_history": "- **Histórico**: SQLite local",
         "btn_refresh": "🔄 Atualizar dados agora",
@@ -344,7 +392,7 @@ node server.js            # http://localhost:8787
         "tab_purchase": "🔵 Compra por região",
         "tab_history": "📈 Histórico e gráficos",
         "tab_about": "ℹ️ Sobre",
-        "lease_header": "Preços de arrendamento IPv4 em tempo real (LARUS)",
+        "lease_header": "Preços de arrendamento IPv4 em tempo real",
         "api_location": "Localização da API",
         "col_block": "Bloco",
         "col_ips": "Nº de IPs",
@@ -358,8 +406,8 @@ node server.js            # http://localhost:8787
         "trace_base": "Base (Capacity Only)",
         "trace_prod": "Production",
         "saved_caption": "Última gravação no histórico: {ts} UTC",
-        "err_larus": "Falha ao carregar dados da API LARUS",
-        "spinner_lease": "Carregando preços de arrendamento do LARUS...",
+        "err_larus": "Falha ao carregar dados da API de preços",
+        "spinner_lease": "Carregando preços de arrendamento...",
         "purchase_header": "Preços médios de compra de IPv4 por região",
         "col_min": "Mín $",
         "col_avg": "Média $",
@@ -370,7 +418,7 @@ node server.js            # http://localhost:8787
         "history_header": "Histórico de preços e dinâmica",
         "days_slider": "Período do histórico (dias)",
         "hist_block_select": "Tamanho do bloco para o histórico de arrendamento",
-        "lease_dynamics": "Dinâmica de arrendamento (LARUS)",
+        "lease_dynamics": "Dinâmica de arrendamento (live)",
         "trace_base_ip": "Base $/IP",
         "trace_prod_ip": "Production $/IP",
         "lease_hist_title": "Histórico de arrendamento {block}",
@@ -396,7 +444,7 @@ Este painel coleta preços atuais de blocos IPv4 de fontes abertas:
 
 | Fonte | Tipo de dados | Atualização |
 |-------|---------------|-------------|
-| **LARUS API** | Arrendamento (live) | a cada 5 minutos |
+| **API de preços** | Arrendamento (live) | a cada 5 minutos |
 | **IPv4Center / relatórios de mercado** | Compra | manual + snapshots |
 | **SQLite local** | Histórico | a cada atualização |
 
@@ -430,13 +478,25 @@ node server.js            # http://localhost:8787
 
     # ============================== DEUTSCH ==============================
     "de": {
+
+        "tab_calc": "🧮 Rechner",
+        "conv_region": "Region (Kauf)",
+        "conv_block": "Subnetz",
+        "conv_own": "Ihr Preis / IP",
+        "conv_fee": "Anwaltsprozent",
+        "conv_fee_head": "Anwalt",
+        "conv_sum24": "Summe/Subnetz",
+        "conv_fee_ip": "Geb./IP",
+        "conv_fee24": "Geb./Subnetz",
+        "conv_total24": "Summe + Geb.",
+        "conv_diff": "Differenz",
         "lang_label": "🌐 Sprache",
         "sidebar_region": "Region (Kauf)",
         "region_all": "Alle Regionen",
         "sidebar_blocks": "Blockgrößen für Diagramme",
         "sidebar_autorefresh": "Auto-Aktualisierung (alle 5 Min.)",
         "sidebar_sources_title": "Quellen",
-        "src_lease": "- **Miete**: LARUS Live API",
+        "src_lease": "- **Miete**: Live-Preis-API",
         "src_purchase": "- **Kauf**: IPv4Center + Marktberichte",
         "src_history": "- **Verlauf**: lokales SQLite",
         "btn_refresh": "🔄 Daten jetzt aktualisieren",
@@ -446,7 +506,7 @@ node server.js            # http://localhost:8787
         "tab_purchase": "🔵 Kauf nach Region",
         "tab_history": "📈 Verlauf & Diagramme",
         "tab_about": "ℹ️ Über",
-        "lease_header": "Live-Mietpreise für IPv4 (LARUS)",
+        "lease_header": "Live-Mietpreise für IPv4",
         "api_location": "API-Standort",
         "col_block": "Block",
         "col_ips": "IP-Anzahl",
@@ -460,8 +520,8 @@ node server.js            # http://localhost:8787
         "trace_base": "Base (Capacity Only)",
         "trace_prod": "Production",
         "saved_caption": "Zuletzt im Verlauf gespeichert: {ts} UTC",
-        "err_larus": "Daten konnten nicht von der LARUS-API geladen werden",
-        "spinner_lease": "Lade Live-Mietpreise von LARUS...",
+        "err_larus": "Daten konnten nicht von der Preis-API geladen werden",
+        "spinner_lease": "Lade Live-Mietpreise...",
         "purchase_header": "Durchschnittliche IPv4-Kaufpreise nach Region",
         "col_min": "Min. $",
         "col_avg": "Durchschn. $",
@@ -472,7 +532,7 @@ node server.js            # http://localhost:8787
         "history_header": "Preisverlauf und Dynamik",
         "days_slider": "Verlaufszeitraum (Tage)",
         "hist_block_select": "Blockgröße für Mietverlauf",
-        "lease_dynamics": "Mietdynamik (LARUS)",
+        "lease_dynamics": "Mietdynamik (live)",
         "trace_base_ip": "Base $/IP",
         "trace_prod_ip": "Production $/IP",
         "lease_hist_title": "Mietverlauf {block}",
@@ -498,7 +558,7 @@ Dieses Dashboard sammelt aktuelle Preise für IPv4-Blöcke aus offenen Quellen:
 
 | Quelle | Datentyp | Aktualisierung |
 |--------|----------|----------------|
-| **LARUS API** | Miete (live) | alle 5 Minuten |
+| **Preis-API** | Miete (live) | alle 5 Minuten |
 | **IPv4Center / Marktberichte** | Kauf | manuell + Snapshots |
 | **Lokales SQLite** | Verlauf | bei jeder Aktualisierung |
 
@@ -532,13 +592,25 @@ node server.js            # http://localhost:8787
 
     # ============================== FRANÇAIS ==============================
     "fr": {
+
+        "tab_calc": "🧮 Calculatrice",
+        "conv_region": "Région (achat)",
+        "conv_block": "Sous-réseau",
+        "conv_own": "Votre prix / IP",
+        "conv_fee": "Pourcentage de l'avocat",
+        "conv_fee_head": "avocat",
+        "conv_sum24": "Somme/sous-réseau",
+        "conv_fee_ip": "comm./IP",
+        "conv_fee24": "comm./sous-réseau",
+        "conv_total24": "Somme + comm.",
+        "conv_diff": "différence",
         "lang_label": "🌐 Langue",
         "sidebar_region": "Région (achat)",
         "region_all": "Toutes les régions",
         "sidebar_blocks": "Tailles de blocs pour les graphiques",
         "sidebar_autorefresh": "Actualisation auto (toutes les 5 min)",
         "sidebar_sources_title": "Sources",
-        "src_lease": "- **Location** : API LARUS Live",
+        "src_lease": "- **Location** : API de prix en direct",
         "src_purchase": "- **Achat** : IPv4Center + rapports de marché",
         "src_history": "- **Historique** : SQLite local",
         "btn_refresh": "🔄 Actualiser les données",
@@ -548,7 +620,7 @@ node server.js            # http://localhost:8787
         "tab_purchase": "🔵 Achat par région",
         "tab_history": "📈 Historique et graphiques",
         "tab_about": "ℹ️ À propos",
-        "lease_header": "Prix de location IPv4 en temps réel (LARUS)",
+        "lease_header": "Prix de location IPv4 en temps réel",
         "api_location": "Localisation API",
         "col_block": "Bloc",
         "col_ips": "Nombre d'IP",
@@ -562,8 +634,8 @@ node server.js            # http://localhost:8787
         "trace_base": "Base (Capacity Only)",
         "trace_prod": "Production",
         "saved_caption": "Dernier enregistrement dans l'historique : {ts} UTC",
-        "err_larus": "Échec du chargement des données depuis l'API LARUS",
-        "spinner_lease": "Chargement des prix de location en direct depuis LARUS...",
+        "err_larus": "Échec du chargement des données depuis l'API de prix",
+        "spinner_lease": "Chargement des prix de location en direct...",
         "purchase_header": "Prix moyens d'achat d'IPv4 par région",
         "col_min": "Min $",
         "col_avg": "Moyenne $",
@@ -574,7 +646,7 @@ node server.js            # http://localhost:8787
         "history_header": "Historique des prix et dynamique",
         "days_slider": "Période d'historique (jours)",
         "hist_block_select": "Taille de bloc pour l'historique de location",
-        "lease_dynamics": "Dynamique de location (LARUS)",
+        "lease_dynamics": "Dynamique de location (live)",
         "trace_base_ip": "Base $/IP",
         "trace_prod_ip": "Production $/IP",
         "lease_hist_title": "Historique de location {block}",
@@ -600,7 +672,7 @@ Ce tableau de bord collecte les prix actuels des blocs IPv4 depuis des sources o
 
 | Source | Type de données | Mise à jour |
 |--------|-----------------|-------------|
-| **API LARUS** | Location (live) | toutes les 5 minutes |
+| **API de prix** | Location (live) | toutes les 5 minutes |
 | **IPv4Center / rapports de marché** | Achat | manuel + instantanés |
 | **SQLite local** | Historique | à chaque actualisation |
 

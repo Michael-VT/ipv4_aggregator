@@ -19,6 +19,8 @@ lateral; as variantes web têm um no cabeçalho. A escolha é lembrada.
 
 ---
 
+> ✅ **Status (2026-09-21):** verificado e publicado no GitHub Pages — <https://michael-vt.github.io/ipv4_aggregator/>
+
 ## Language / Мова / Язык
 
 [English](README.md) · [Українська](README.UA.md) · [Русский](README.RU.md) · [Português](README.PT.md) · [Deutsch](README.DE.md) · [Français](README.FR.md)
